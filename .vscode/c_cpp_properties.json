@@ -1,0 +1,14 @@
+{
+  "configurations": [
+    {
+      "name": "xui",
+      "includePath": [
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/src"
+      ],
+      "compilerPath": "/usr/bin/clang",
+      "cStandard": "c17"
+    }
+  ],
+  "version": 4
+}
