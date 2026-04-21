@@ -64,8 +64,17 @@ void xui_platform_enable_text_input(int enabled)
 
 - (void)windowWillClose:(NSNotification *)notification
 {
-    // If this is the last window, quit app
-    if ([[NSApp windows] count] <= 1)
+    int visibleCount = 0;
+
+    for (NSWindow* win in [NSApp windows])
+    {
+        if ([win isVisible])
+        {
+            visibleCount++;
+        }
+    }
+
+    if (visibleCount <= 1)
     {
         xui_platform_quit();
     }
