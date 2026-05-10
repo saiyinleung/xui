@@ -3,15 +3,16 @@
     "tasks": [
         {
             "label": "build xui",
-            "type": "shell",
             "osx": {
+                "type": "shell",
                 "command": "bash",
                 "args": ["build.sh"],
             },
 
             "windows": {
+                "type": "process",
                 "command": "cmd",
-                "args": ["/c", "build.bat"],
+                "args": ["/c", "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\VC\\Auxiliary\\Build\\vcvars64.bat", "&&", "build.bat"],
             },
 
             "options": {

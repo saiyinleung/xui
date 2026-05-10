@@ -52,7 +52,7 @@ int xui_internal_to_native_gfx_y(int y, int h)
     (void)h;
     return y;
 #else
-    return g_window_height - y - h;
+    return g_xui.window_height - y - h;
 #endif
 }
 
