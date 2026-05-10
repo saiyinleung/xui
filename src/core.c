@@ -56,6 +56,16 @@ int xui_internal_to_native_gfx_y(int y, int h)
 #endif
 }
 
+void xui_strncpy(char* dst, const char* src, size_t n)
+{
+#ifdef _WIN32
+    strncpy_s(dst, n, src, _TRUNCATE);
+#else
+    strncpy(dst, src, n);
+#endif
+    dst[n - 1] = '\0';
+}
+
 // =====================================================
 // Callback registration
 // =====================================================
