@@ -154,8 +154,9 @@ xui_button xui_platform_create_button(
     const char* label,
     int x, int y, int w, int h)
 {
+    int ny = xui_internal_to_native_ui_y(y, h);
     NSButton* btn =
-        [[NSButton alloc] initWithFrame:NSMakeRect(x, y, w, h)];
+        [[NSButton alloc] initWithFrame:NSMakeRect(x, ny, w, h)];
 
     [btn setTitle:[NSString stringWithUTF8String:label]];
     [btn setBezelStyle:NSBezelStyleRounded];
@@ -180,9 +181,10 @@ xui_textbox xui_platform_create_textbox(
     int x, int y, int w, int h)
 {
     (void)id; // currently unused, but reserved for future focus system
+    int ny = xui_internal_to_native_ui_y(y, h);
 
     NSTextField* field =
-        [[NSTextField alloc] initWithFrame:NSMakeRect(x, y, w, h)];
+        [[NSTextField alloc] initWithFrame:NSMakeRect(x, ny, w, h)];
 
     [[g_window contentView] addSubview:field];
 

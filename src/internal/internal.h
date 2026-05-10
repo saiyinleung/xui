@@ -36,6 +36,9 @@ typedef struct {
     xui_textbox handle;
 } xui_textbox_internal;
 
+int xui_internal_to_native_ui_y(int y, int h);
+int xui_internal_to_native_gfx_y(int y, int h);
+
 // =====================================================
 // Callback types (public-facing, stored internally)
 // =====================================================
@@ -65,6 +68,9 @@ typedef struct {
     xui_menu_callback menu_cb;
     xui_key_callback key_cb;
     xui_mouse_callback mouse_cb;
+
+    int window_width;
+    int window_height;    
 
 } xui_state;
 
