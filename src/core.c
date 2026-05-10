@@ -110,7 +110,7 @@ void xui_button_create(int id, const char* label, int x, int y, int w, int h)
     b->w = w;
     b->h = h;
 
-    strncpy(b->label, label, sizeof(b->label) - 1);
+    xui_strncpy(b->label, label, sizeof(b->label) - 1);
 
     b->handle = xui_platform_create_button(id, label, x, y, w, h);
 }
@@ -143,7 +143,7 @@ void xui_textbox_set_text(int id, const char* text)
     {
         if (g_xui.textboxes[i].id == id)
         {
-            strncpy(g_xui.textboxes[i].text, text,
+            xui_strncpy(g_xui.textboxes[i].text, text,
                     sizeof(g_xui.textboxes[i].text) - 1);
 
             xui_platform_set_textbox_text(
