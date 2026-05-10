@@ -4,8 +4,16 @@
         {
             "label": "build xui",
             "type": "shell",
-            "command": "bash",
-            "args": ["build.sh"],
+            "osx": {
+                "command": "bash",
+                "args": ["build.sh"],
+            },
+
+            "windows": {
+                "command": "cmd",
+                "args": ["/c", "build.bat"],
+            },
+
             "options": {
                 "cwd": "${workspaceFolder}"
             },
