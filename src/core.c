@@ -20,6 +20,8 @@ void xui_init(const char* title, int w, int h)
     memset(&g_xui, 0, sizeof(g_xui));
     g_xui.focused_textbox_id = -1;
 
+    g_xui.window_width  = w;
+    g_xui.window_height = h;
     xui_platform_init(title, w, h);
 }
 
@@ -31,6 +33,27 @@ void xui_run()
 void xui_quit()
 {
     xui_platform_quit();
+}
+
+
+int xui_internal_to_native_ui_y(int y, int h)
+{
+#ifdef __APPLE__
+    return g_xui.window_height - y - h;
+#else
+    (void)h;
+    return y;
+#endif
+}
+
+int xui_internal_to_native_gfx_y(int y, int h)
+{
+#ifdef __APPLE__
+    (void)h;
+    return y;
+#else
+    return g_window_height - y - h;
+#endif
 }
 
 // =====================================================
