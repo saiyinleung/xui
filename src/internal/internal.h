@@ -19,8 +19,6 @@ typedef void* xui_menu_item;
 
 #define XUI_MAX_BUTTONS   128
 #define XUI_MAX_TEXTBOXES 128
-#define XUI_MAX_MENUS     128
-#define XUI_MAX_MENU_ITEMS 128
 
 // =====================================================
 // Internal UI state structs
@@ -39,21 +37,6 @@ typedef struct {
     char text[256];
     xui_textbox handle;
 } xui_textbox_internal;
-
-typedef struct {
-    int id;
-    char label[64];
-    xui_menu_item handle;
-} xui_menu_item_internal;
-
-typedef struct {
-    int id;
-    char label[64];
-    xui_menu handle;
-    xui_menu_item_internal items[XUI_MAX_MENU_ITEMS];
-    int item_count;
-} xui_menu_internal;
-
 
 int xui_internal_to_native_ui_y(int y, int h);
 int xui_internal_to_native_gfx_y(int y, int h);

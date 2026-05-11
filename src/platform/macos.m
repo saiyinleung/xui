@@ -230,20 +230,20 @@ xui_menu xui_platform_create_menu(const char* name)
                              keyEquivalent:@""];
     [g_menu addItem:menuItem];  // add menu to menubar
 
-    NSMenu* menu = [[NSMenu alloc] initWithTitle:@"Menu"];
+    NSMenu* menu = [[NSMenu alloc] initWithTitle:title];
     [menuItem setSubmenu:menu];
 
     return (xui_menu)menu;
 }
 
-xui_menu xui_platform_create_submenu(xui_menu menu, const char* name, int id)
+xui_menu xui_platform_create_submenu(xui_menu menu, const char* name)
 {
     NSString* title = [NSString stringWithUTF8String:name];
     NSMenuItem* menuItem =
         [[NSMenuItem alloc] initWithTitle:title
                                     action:nil
                              keyEquivalent:@""];
-    [(NSMenu*) menu addItem:menuItem];  // add menu to menubar
+    [(NSMenu*) menu addItem:menuItem];  // add as submenu
 
     NSMenu* new_menu = [[NSMenu alloc] initWithTitle:@"Menu"];
     [menuItem setSubmenu:new_menu];

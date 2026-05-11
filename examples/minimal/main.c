@@ -81,7 +81,7 @@ int main()
     // 3. Menu
     xui_menu m = xui_menu_create("BBB");
     xui_menu_add_item(m, "Quit", MENU_QUIT);
-    xui_menu m2 = xui_menu_create_submenu(m,"CCC");
+    xui_menu m2 = xui_menu_create("CCC");
     xui_menu_add_item(m2, "Bye", MENU_QUIT);
 
 
