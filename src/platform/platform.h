@@ -1,5 +1,6 @@
 #ifndef XUI_PLATFORM_H
 #define XUI_PLATFORM_H
+#include <stddef.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -77,6 +78,11 @@ xui_menu_item xui_platform_add_menu_item(xui_menu menu, const char* name, int id
 // =====================================================
 
 void xui_platform_set_title(const char* title);
+
+int xui_native_ui_y(int y, int h);
+int xui_native_gfx_y(int y, int h);
+void xui_strncpy(char* dst, const char* src, size_t n);
+
 
 #ifdef __cplusplus
 }

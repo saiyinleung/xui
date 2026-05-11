@@ -202,4 +202,21 @@ xui_menu_item xui_platform_add_menu_item(xui_menu menu, const char* name, int id
 }
 
 
+int xui_native_ui_y(int y, int h)
+{
+    (void)h;
+    return y;
+}
+
+int xui_native_gfx_y(int y, int h)
+{
+    return g_xui.window_height - y - h;
+}
+
+void xui_strncpy(char* dst, const char* src, size_t n)
+{
+    strncpy_s(dst, n, src, _TRUNCATE);
+    dst[n - 1] = '\0';
+}
+
 #endif

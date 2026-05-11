@@ -35,37 +35,6 @@ void xui_quit()
     xui_platform_quit();
 }
 
-
-int xui_internal_to_native_ui_y(int y, int h)
-{
-#ifdef __APPLE__
-    return g_xui.window_height - y - h;
-#else
-    (void)h;
-    return y;
-#endif
-}
-
-int xui_internal_to_native_gfx_y(int y, int h)
-{
-#ifdef __APPLE__
-    (void)h;
-    return y;
-#else
-    return g_xui.window_height - y - h;
-#endif
-}
-
-void xui_strncpy(char* dst, const char* src, size_t n)
-{
-#ifdef _WIN32
-    strncpy_s(dst, n, src, _TRUNCATE);
-#else
-    strncpy(dst, src, n);
-#endif
-    dst[n - 1] = '\0';
-}
-
 // =====================================================
 // Callback registration
 // =====================================================

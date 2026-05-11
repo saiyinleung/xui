@@ -38,10 +38,6 @@ typedef struct {
     xui_textbox handle;
 } xui_textbox_internal;
 
-int xui_internal_to_native_ui_y(int y, int h);
-int xui_internal_to_native_gfx_y(int y, int h);
-void xui_strncpy(char* dst, const char* src, size_t n);
-
 // =====================================================
 // Callback types (public-facing, stored internally)
 // =====================================================

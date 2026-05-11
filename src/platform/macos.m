@@ -154,7 +154,7 @@ xui_button xui_platform_create_button(
     const char* label,
     int x, int y, int w, int h)
 {
-    int ny = xui_internal_to_native_ui_y(y, h);
+    int ny = xui_native_ui_y(y, h);
     NSButton* btn =
         [[NSButton alloc] initWithFrame:NSMakeRect(x, ny, w, h)];
 
@@ -181,7 +181,7 @@ xui_textbox xui_platform_create_textbox(
     int x, int y, int w, int h)
 {
     (void)id; // currently unused, but reserved for future focus system
-    int ny = xui_internal_to_native_ui_y(y, h);
+    int ny = xui_native_ui_y(y, h);
 
     NSTextField* field =
         [[NSTextField alloc] initWithFrame:NSMakeRect(x, ny, w, h)];
@@ -267,6 +267,24 @@ xui_menu_item xui_platform_add_menu_item(xui_menu menu, const char* name, int id
     [(NSMenu*) menu addItem:item];
 
     return (xui_menu_item)item;
+}
+
+
+int xui_native_ui_y(int y, int h)
+{
+    return g_xui.window_height - y - h;
+}
+
+int xui_native_gfx_y(int y, int h)
+{
+    (void)h;
+    return y;
+}
+
+void xui_strncpy(char* dst, const char* src, size_t n)
+{
+    strncpy(dst, src, n);
+    dst[n - 1] = '\0';
 }
 
 #endif
