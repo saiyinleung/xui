@@ -160,6 +160,16 @@ void xui_textbox_set_text(int id, const char* text)
 // MENU API
 // =====================================================
 
+xui_menu xui_menu_create_ex(const char* name)
+{
+    return xui_platform_create_menu_ex(name);
+}
+
+xui_menu_item xui_menu_add_item_ex(xui_menu menu, const char* name, int id)
+{
+    return xui_platform_add_menu_item_ex(menu, name, id);
+}       
+
 void xui_menu_create()
 {
     xui_platform_create_menu();

@@ -13,6 +13,7 @@ typedef void* xui_window;
 typedef void* xui_button;
 typedef void* xui_textbox;
 typedef void* xui_menu;
+typedef void* xui_menu_item;
 
 // =====================================================
 // Event callbacks (platform → core)
@@ -69,6 +70,8 @@ void xui_platform_enable_text_input(int enabled);
 
 void xui_platform_create_menu();
 void xui_platform_add_menu_item(const char* name, int id);
+xui_menu xui_platform_create_menu_ex(const char* name);
+xui_menu_item xui_platform_add_menu_item_ex(xui_menu menu, const char* name, int id);
 
 // =====================================================
 // Window utilities

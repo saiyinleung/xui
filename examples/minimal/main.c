@@ -79,8 +79,10 @@ int main()
     xui_set_mouse_handler(on_mouse);
 
     // 3. Menu
-    xui_menu_create();
-    xui_menu_add_item("Quit", MENU_QUIT);
+    xui_menu m = xui_menu_create_ex("BBB");
+    //xui_menu_create();
+    xui_menu_add_item_ex(m, "Quit", MENU_QUIT);
+    xui_menu_add_item_ex(m, "Bye", MENU_QUIT);
 
     // 4. UI elements
     xui_button_create(BTN_HELLO, "Say Hello", 50, 50, 120, 40);

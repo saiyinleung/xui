@@ -175,6 +175,16 @@ void xui_platform_set_textbox_text(xui_textbox tb, const char* text)
 
 static HMENU g_menu = NULL;
 
+xui_menu xui_platform_create_menu_ex(const char* name)
+{
+    (void)name; // Future expansion: use this for submenus
+
+    g_menu = CreateMenu();
+    SetMenu(g_hwnd, g_menu);
+
+    return (xui_menu)g_menu;
+}
+
 void xui_platform_create_menu()
 {
     g_menu = CreateMenu();

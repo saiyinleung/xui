@@ -216,6 +216,45 @@ static NSMenu* g_menu = nil;
 
 @end
 
+xui_menu xui_platform_create_menu_ex(const char* name)
+{
+    if (g_menu == nil) {
+        g_menu = [[NSMenu alloc] initWithTitle:@"Menubar"];
+        [NSApp setMainMenu:g_menu];
+    }
+
+    NSString* title = [NSString stringWithUTF8String:name];
+    NSMenuItem* menuItem =
+        [[NSMenuItem alloc] initWithTitle:title
+                                    action:nil
+                             keyEquivalent:@""];
+    [g_menu addItem:menuItem];  // add menu to menubar
+
+    NSMenu* menu = [[NSMenu alloc] initWithTitle:@"Menu"];
+    [menuItem setSubmenu:menu];
+
+    return (xui_menu)menu;
+}
+
+xui_menu_item xui_platform_add_menu_item_ex(xui_menu menu, const char* name, int id)
+{
+    NSString* title = [NSString stringWithUTF8String:name];
+
+    XUIMenuTarget* target = [XUIMenuTarget new];
+    target.itemId = id;
+
+    NSMenuItem* item =
+        [[NSMenuItem alloc] initWithTitle:title
+                                    action:@selector(onSelect:)
+                             keyEquivalent:@""];
+
+    [item setTarget:target];
+    
+    [(NSMenu*) menu addItem:item];
+
+    return (xui_menu_item)item;
+}
+
 void xui_platform_create_menu()
 {
     g_menu = [[NSMenu alloc] initWithTitle:@"MainMenu"];
