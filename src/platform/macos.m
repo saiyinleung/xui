@@ -216,7 +216,7 @@ static NSMenu* g_menu = nil;
 
 @end
 
-xui_menu xui_platform_create_menu_ex(const char* name)
+xui_menu xui_platform_create_menu(const char* name)
 {
     if (g_menu == nil) {
         g_menu = [[NSMenu alloc] initWithTitle:@"Menubar"];
@@ -236,7 +236,21 @@ xui_menu xui_platform_create_menu_ex(const char* name)
     return (xui_menu)menu;
 }
 
-xui_menu_item xui_platform_add_menu_item_ex(xui_menu menu, const char* name, int id)
+xui_menu xui_platform_create_submenu(xui_menu menu, const char* name, int id)
+{
+    NSString* title = [NSString stringWithUTF8String:name];
+    NSMenuItem* menuItem =
+        [[NSMenuItem alloc] initWithTitle:title
+                                    action:nil
+                             keyEquivalent:@""];
+    [(NSMenu*) menu addItem:menuItem];  // add menu to menubar
+
+    NSMenu* new_menu = [[NSMenu alloc] initWithTitle:@"Menu"];
+    [menuItem setSubmenu:new_menu];
+    return (xui_menu)new_menu;
+}
+
+xui_menu_item xui_platform_add_menu_item(xui_menu menu, const char* name, int id)
 {
     NSString* title = [NSString stringWithUTF8String:name];
 
@@ -253,43 +267,6 @@ xui_menu_item xui_platform_add_menu_item_ex(xui_menu menu, const char* name, int
     [(NSMenu*) menu addItem:item];
 
     return (xui_menu_item)item;
-}
-
-void xui_platform_create_menu()
-{
-    g_menu = [[NSMenu alloc] initWithTitle:@"MainMenu"];
-
-    NSMenuItem* rootItem =
-        [[NSMenuItem alloc] initWithTitle:@"App"
-                                    action:nil
-                             keyEquivalent:@""];
-
-    [g_menu addItem:rootItem];
-
-    NSMenu* appMenu = [[NSMenu alloc] initWithTitle:@"App"];
-    [rootItem setSubmenu:appMenu];
-
-    [NSApp setMainMenu:g_menu];
-}
-
-void xui_platform_add_menu_item(const char* name, int id)
-{
-    NSString* title = [NSString stringWithUTF8String:name];
-
-    XUIMenuTarget* target = [XUIMenuTarget new];
-    target.itemId = id;
-
-    NSMenuItem* item =
-        [[NSMenuItem alloc] initWithTitle:title
-                                    action:@selector(onSelect:)
-                             keyEquivalent:@""];
-
-    [item setTarget:target];
-
-    NSMenu* appMenu =
-        [[g_menu itemAtIndex:0] submenu];
-
-    [appMenu addItem:item];
 }
 
 #endif

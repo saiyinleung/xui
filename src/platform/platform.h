@@ -68,10 +68,9 @@ void xui_platform_enable_text_input(int enabled);
 // Menu
 // =====================================================
 
-void xui_platform_create_menu();
-void xui_platform_add_menu_item(const char* name, int id);
-xui_menu xui_platform_create_menu_ex(const char* name);
-xui_menu_item xui_platform_add_menu_item_ex(xui_menu menu, const char* name, int id);
+xui_menu xui_platform_create_menu(const char* name);
+xui_menu xui_platform_create_submenu(xui_menu menu, const char* name);
+xui_menu_item xui_platform_add_menu_item(xui_menu menu, const char* name, int id);
 
 // =====================================================
 // Window utilities

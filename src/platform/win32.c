@@ -175,26 +175,31 @@ void xui_platform_set_textbox_text(xui_textbox tb, const char* text)
 
 static HMENU g_menu = NULL;
 
-xui_menu xui_platform_create_menu_ex(const char* name)
+xui_menu xui_platform_create_menu(const char* name)
 {
-    (void)name; // Future expansion: use this for submenus
+    if (g_menu == 0) {
+        g_menu = CreateMenu();
+        SetMenu(g_hwnd, g_menu);
+    }
+    HMENU hMenu = CreatePopupMenu();
+    AppendMenuA(g_menu, MF_POPUP, (UINT_PTR)hMenu, name);
 
-    g_menu = CreateMenu();
-    SetMenu(g_hwnd, g_menu);
-
-    return (xui_menu)g_menu;
+    return (xui_menu)hMenu;
 }
 
-void xui_platform_create_menu()
+xui_menu xui_platform_create_submenu(xui_menu menu, const char* name)
 {
-    g_menu = CreateMenu();
-    SetMenu(g_hwnd, g_menu);
+    HMENU hMenu = CreatePopupMenu();
+    AppendMenuA((HMENU)menu, MF_POPUP, (UINT_PTR)hMenu, name);
+    return (xui_menu)hMenu;
 }
 
-void xui_platform_add_menu_item(const char* name, int id)
+xui_menu_item xui_platform_add_menu_item(xui_menu menu, const char* name, int id)
 {
-    AppendMenuA(g_menu, MF_STRING, id, name);
+    AppendMenuA((HMENU)menu, MF_STRING, id, name);
     DrawMenuBar(g_hwnd);
+    return 0;
 }
+
 
 #endif
